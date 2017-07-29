@@ -14,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.linghao.mychattest.R;
+import com.linghao.mychattest.model.Model;
 import com.linghao.mychattest.model.bean.Recruit;
 import com.linghao.mychattest.utils.LogUtil;
 

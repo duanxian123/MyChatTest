@@ -51,6 +51,9 @@ public class Model {
         EventListener eventListener = new EventListener(context);
 
     }
+    public BmobDao getBmobDao(){
+        return bmobDao;
+    }
     //获取全局线程池
     public ExecutorService getGlobalThreadPool(){
         return  executors;
@@ -67,9 +70,6 @@ public class Model {
     public DBManager getDBManager(){
         return dBManager;
     }
-   public BmobDao getBmobDao(){
-       return bmobDao;
-   }
     public void loginSuccess(UserInfo userInfo) {
         if(userInfo==null){
             return;

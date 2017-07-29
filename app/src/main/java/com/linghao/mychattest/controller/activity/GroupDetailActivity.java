@@ -17,11 +17,16 @@ import com.hyphenate.exceptions.HyphenateException;
 import com.linghao.mychattest.R;
 import com.linghao.mychattest.controller.adapter.GroupDetailAdapter;
 import com.linghao.mychattest.model.Model;
+import com.linghao.mychattest.model.bean.Recruit;
 import com.linghao.mychattest.model.bean.UserInfo;
 import com.linghao.mychattest.utils.Constant;
+import com.linghao.mychattest.utils.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.UpdateListener;
 
 // 群详情页面
 public class GroupDetailActivity extends Activity {
@@ -252,6 +257,19 @@ public class GroupDetailActivity extends Activity {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
+                                         //把bmob中的群信息删除
+                                        Recruit recruit=new Recruit();
+                                        recruit.setGroupId(mGroup.getGroupId());
+                                        recruit.delete(new UpdateListener() {
+                                            @Override
+                                            public void done(BmobException e) {
+                                                if(e==null){
+                                                    LogUtil.e("删除成功");
+                                                }else{
+                                                    LogUtil.e("删除失败");
+                                                }
+                                            }
+                                        });
                                         Toast.makeText(GroupDetailActivity.this, "解散群成功", Toast.LENGTH_SHORT).show();
 
                                         // 结束当前页面

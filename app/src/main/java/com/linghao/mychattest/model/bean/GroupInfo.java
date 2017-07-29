@@ -1,5 +1,7 @@
 package com.linghao.mychattest.model.bean;
 
+import com.linghao.mychattest.model.Model;
+
 /**
  * Created by linghao on 2017/7/23.
  * QQ：782695971

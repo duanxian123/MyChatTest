@@ -20,6 +20,10 @@
         "source": "C:\\Users\\linghao\\.android\\build-cache\\60f3551df505a2f6a8a440fbeb53261e5f5a5217\\output\\res\\color-v23\\abc_tint_seek_thumb.xml"
     },
     {
+        "merged": "C:\\android stdio\\MyChatTest\\easeui\\build\\intermediates\\res\\merged\\debug\\color-v23\\design_tint_password_toggle.xml",
+        "source": "C:\\Users\\linghao\\.android\\build-cache\\8f50efbc4e5f72d1417cd99f825f2472275796c9\\output\\res\\color-v23\\design_tint_password_toggle.xml"
+    },
+    {
         "merged": "C:\\android stdio\\MyChatTest\\easeui\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_default.xml",
         "source": "C:\\Users\\linghao\\.android\\build-cache\\60f3551df505a2f6a8a440fbeb53261e5f5a5217\\output\\res\\color-v23\\abc_tint_default.xml"
     },
@@ -30,6 +34,10 @@
     {
         "merged": "C:\\android stdio\\MyChatTest\\easeui\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_edittext.xml",
         "source": "C:\\Users\\linghao\\.android\\build-cache\\60f3551df505a2f6a8a440fbeb53261e5f5a5217\\output\\res\\color-v23\\abc_tint_edittext.xml"
+    },
+    {
+        "merged": "C:\\android stdio\\MyChatTest\\easeui\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_btn_colored_text_material.xml",
+        "source": "C:\\Users\\linghao\\.android\\build-cache\\f7fb937d4b835fab36ed1cc72a2371cabea76ce3\\output\\res\\color-v23\\abc_btn_colored_text_material.xml"
     },
     {
         "merged": "C:\\android stdio\\MyChatTest\\easeui\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_spinner.xml",

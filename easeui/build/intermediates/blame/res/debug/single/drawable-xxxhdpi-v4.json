@@ -36,6 +36,10 @@
         "source": "C:\\Users\\linghao\\.android\\build-cache\\60f3551df505a2f6a8a440fbeb53261e5f5a5217\\output\\res\\drawable-xxxhdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png"
     },
     {
+        "merged": "C:\\android stdio\\MyChatTest\\easeui\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\design_ic_visibility.png",
+        "source": "C:\\Users\\linghao\\.android\\build-cache\\8f50efbc4e5f72d1417cd99f825f2472275796c9\\output\\res\\drawable-xxxhdpi-v4\\design_ic_visibility.png"
+    },
+    {
         "merged": "C:\\android stdio\\MyChatTest\\easeui\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png",
         "source": "C:\\Users\\linghao\\.android\\build-cache\\60f3551df505a2f6a8a440fbeb53261e5f5a5217\\output\\res\\drawable-xxxhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png"
     },
@@ -78,6 +82,10 @@
     {
         "merged": "C:\\android stdio\\MyChatTest\\easeui\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_spinner_mtrl_am_alpha.9.png",
         "source": "C:\\Users\\linghao\\.android\\build-cache\\60f3551df505a2f6a8a440fbeb53261e5f5a5217\\output\\res\\drawable-xxxhdpi-v4\\abc_spinner_mtrl_am_alpha.9.png"
+    },
+    {
+        "merged": "C:\\android stdio\\MyChatTest\\easeui\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\design_ic_visibility_off.png",
+        "source": "C:\\Users\\linghao\\.android\\build-cache\\8f50efbc4e5f72d1417cd99f825f2472275796c9\\output\\res\\drawable-xxxhdpi-v4\\design_ic_visibility_off.png"
     },
     {
         "merged": "C:\\android stdio\\MyChatTest\\easeui\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_btn_check_to_on_mtrl_015.png",

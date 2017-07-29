@@ -16,10 +16,10 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
-
-import static android.R.attr.key;
-import static android.R.attr.type;
-import static com.linghao.mychattest.R.id.home_recycleview;
+//
+//import static android.R.attr.key;
+//import static android.R.attr.type;
+//import static com.linghao.mychattest.R.id.home_recycleview;
 
 /**
  * Created by linghao on 2017/7/28.
@@ -55,8 +55,6 @@ public class BmobDao {
 
         });
     }
-    //查询HopeInvited整列数据
-
 
     public interface OnDataReceiveSuccessListener{
         void onSuccess(List<Recruit> list);

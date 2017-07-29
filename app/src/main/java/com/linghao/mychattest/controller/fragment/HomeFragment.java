@@ -3,7 +3,11 @@ package com.linghao.mychattest.controller.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,10 +17,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
+import com.hyphenate.chat.adapter.EMACallSession;
 import com.linghao.mychattest.R;
 import com.linghao.mychattest.controller.activity.WriteInvitedActivity;
 import com.linghao.mychattest.controller.activity.WriteRecruitActivity;
 import com.linghao.mychattest.controller.adapter.HomeAdapter;
+import com.linghao.mychattest.controller.pager.HomeTypePager;
 import com.linghao.mychattest.model.CustomView.MytoggleButton;
 import com.linghao.mychattest.model.Model;
 import com.linghao.mychattest.model.bean.HopeInvited;
@@ -24,14 +30,18 @@ import com.linghao.mychattest.model.bean.Recruit;
 import com.linghao.mychattest.model.dao.BmobDao;
 import com.linghao.mychattest.utils.Constant;
 import com.linghao.mychattest.controller.adapter.anotherHomeAdapter;
+import com.linghao.mychattest.utils.LogUtil;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+
+import static com.xiaomi.push.service.y.s;
 
 /**
  * Created by linghao on 2017/7/27.
@@ -49,6 +59,10 @@ public class HomeFragment extends Fragment {
     private MytoggleButton mytoggleButton;
     private FrameLayout fl_home_fragment;
     private FrameLayout another_fragment;
+    private ViewPager viewPager;
+    private ArrayList<HomeTypePager> homeTypePagers;
+    private TabLayout tablayout;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Bmob.initialize(getActivity(), Constant.Bmobinit);
@@ -60,17 +74,17 @@ public class HomeFragment extends Fragment {
 
     private void iniView(View view) {
         bt_add_recruit = (Button) view.findViewById(R.id.bt_add_recruit);
-        home_recycleview = (RecyclerView) view.findViewById(R.id.home_recycleview);
+//        home_recycleview = (RecyclerView) view.findViewById(R.id.home_recycleview);
         bt_add_invited = (Button) view.findViewById(R.id.bt_add_invited);
-        another_home_recycleview = (RecyclerView) view.findViewById(R.id.another_home_recycleview);
-        mytoggleButton= (MytoggleButton) view.findViewById(R.id.mytoggleButton);
-        fl_home_fragment= (FrameLayout) view.findViewById(R.id.fl_home_fragment);
-        another_fragment= (FrameLayout) view.findViewById(R.id.another_fragment);
+        another_home_recycleview = (RecyclerView) view.findViewById(R.id.another_home_reycleview);
+        mytoggleButton = (MytoggleButton) view.findViewById(R.id.mytoggleButton);
+        fl_home_fragment = (FrameLayout) view.findViewById(R.id.fl_home_fragment);
+        another_fragment = (FrameLayout) view.findViewById(R.id.another_fragment);
         mytoggleButton.setmyToggleButtonListener(new MytoggleButton.myToggleButtonListener() {
             @Override
             public void open() {
                 fl_home_fragment.setVisibility(View.VISIBLE);
-             another_fragment.setVisibility(View.GONE);
+                another_fragment.setVisibility(View.GONE);
             }
 
             @Override
@@ -80,6 +94,10 @@ public class HomeFragment extends Fragment {
 
             }
         });
+        viewPager= (ViewPager) view.findViewById(R.id.home_viewpager);
+       tablayout = (TabLayout) view.findViewById(R.id.ide);
+        swipeRefreshLayout= (SwipeRefreshLayout) view.findViewById(R.id.fresh);
+        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
     }
 
     @Override
@@ -104,26 +122,104 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initData();
+            }
+        });
     }
 
     private void initData() {
-        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        home_recycleview.setLayoutManager(linearLayoutManager);
-                   //招募页面适配器
-         Model.getInstance().getBmobDao().getSomeColumnfromBmob("title,content", new BmobDao.OnDataReceiveSuccessListener() {
-            @Override
-            public void onSuccess(List<Recruit> list) {
-                homeAdapter = new HomeAdapter(getActivity(), list);
-                home_recycleview.setAdapter(homeAdapter);
+        homeTypePagers=new ArrayList<>();
+        homeTypePagers.add(new HomeTypePager(getActivity(),"篮球"));
+        homeTypePagers.add(new HomeTypePager(getActivity(),"足球"));
+        homeTypePagers.add(new HomeTypePager(getActivity(),"跑步"));
+        homeTypePagers.add(new HomeTypePager(getActivity(),"游泳"));
+        homeTypePagers.add(new HomeTypePager(getActivity(),"旅游"));
 
-            }
+        viewPager.setAdapter(new HomeTypeAdapter());
+        tablayout.setupWithViewPager(viewPager);
+//        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+//        home_recycleview.setLayoutManager(linearLayoutManager);
+//        //招募页面适配器
+//       final String type = "足球";
+//        Model.getInstance().getBmobDao().getSomeColumnfromBmob("title,content,type,groupId", new BmobDao.OnDataReceiveSuccessListener() {
+//            @Override
+//            public void onSuccess(List<Recruit> list) {
+//                LogUtil.e(list.size()+"********");
+//                List<Recruit> a=new ArrayList<>();
+//                for (int i=0;i<list.size();i++){
+//                    if(list.get(i).getType().equals(type)){
+//                        a.add(list.get(i));
+//                    }
+//                }
+//                for (int i=0;i<a.size();i++){
+//                   LogUtil.e(a.get(i).getType());
+//                }
+//                LogUtil.e(a.size()+"********");
+//                homeAdapter = new HomeAdapter(getActivity(), a);
+//                home_recycleview.setAdapter(homeAdapter);
+//
+//            }
+//
+//        });
 
-         });
-        //希望被邀请页面适配器
+
+
+//        希望被邀请页面适配器
         HopeInvitedFromBmob();
-
+        swipeRefreshLayout.setRefreshing(false);
     }
+    class HomeTypeAdapter extends PagerAdapter {
+        @Override
+        public CharSequence getPageTitle(int position) {
+            String typename = null;
+            switch (position){
+                case 0:
+                    typename="篮球";
+                    break;
+                case 1:
+                    typename="足球";
+                    break;
+                case 2:
+                    typename="跑步";
+                    break;
+                case 3:
+                    typename="游泳";
+                    break;
+                case 4:
+                    typename="旅游";
+                    break;
+                    
+            }
+            return typename;
+        }
 
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            HomeTypePager homeTypePager=homeTypePagers.get(position);
+            View rootview=homeTypePager.rootView;
+            container.addView(rootview);
+//            basePager.initData();
+            return rootview;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            container.removeView((View) object);
+        }
+
+        @Override
+        public int getCount() {
+            return homeTypePagers.size();
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object object) {
+             return view==object;
+        }
+    }
     private void HopeInvitedFromBmob() {
         BmobQuery<HopeInvited> query = new BmobQuery<HopeInvited>();
         query.addQueryKeys("username,content,createdAt");
@@ -131,10 +227,10 @@ public class HomeFragment extends Fragment {
             @Override
             public void done(List<HopeInvited> list, BmobException e) {
                 if (e == null) {
-                    Log.e("bmob", "成功" );
+                    Log.e("bmob", "成功");
                     LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getActivity());
                     another_home_recycleview.setLayoutManager(linearLayoutManager1);
-                    anotherHomeAdapter anotherHomeAdapter=new anotherHomeAdapter(getActivity(),list);
+                    anotherHomeAdapter anotherHomeAdapter = new anotherHomeAdapter(getActivity(), list);
                     another_home_recycleview.setAdapter(anotherHomeAdapter);
                 } else {
                     Log.e("bmob", "失败：" + e.getMessage() + "," + e.getErrorCode());

@@ -17,7 +17,9 @@ public class Recruit extends BmobObject {
     private String content;
     private String time;
     private String type;
+public Recruit(){
 
+}
     public Recruit( String title, String groupId, String groupOwner, String maxPerson, String content, String time, String type) {
         this.title = title;
         this.groupId = groupId;
