@@ -18,14 +18,20 @@
             android:textColor="@android:color/white"
             android:textSize="25sp" />
 
-        <com.linghao.mychattest.model.CustomView.MytoggleButton
+        <com.linghao.mychattest.utils.customview.MytoggleButton
             android:id="@+id/mytoggleButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true" />
     </RelativeLayout>
-
+    <!--<ProgressBar-->
+        <!--android:layout_width="100dp"-->
+        <!--android:layout_height="110dp"-->
+        <!--android:id="@+id/progress"-->
+        <!--style="?android:progressBarStyleInverse"-->
+        <!--android:indeterminateDrawable="@drawable/page_loading"-->
+        <!--/>-->
     <FrameLayout
         android:id="@+id/fl_home_fragment"
         android:layout_width="match_parent"
@@ -35,8 +41,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
         <LinearLayout
-            android:id="@+id/swipe_fresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -58,14 +64,12 @@
               android:id="@+id/home_viewpager">
 
           </android.support.v4.view.ViewPager>
-            <!--<android.support.v7.widget.RecyclerView-->
-                <!--android:id="@+id/home_recycleview"-->
-                <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>-->
-</LinearLayout>
-        </android.support.v4.widget.SwipeRefreshLayout>
 
+</LinearLayout>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
     </FrameLayout>
+
 
     <FrameLayout
         android:id="@+id/another_fragment"

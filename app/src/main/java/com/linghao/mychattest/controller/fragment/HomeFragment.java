@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 
 import com.hyphenate.chat.adapter.EMACallSession;
 import com.linghao.mychattest.R;
@@ -23,14 +24,11 @@ import com.linghao.mychattest.controller.activity.WriteInvitedActivity;
 import com.linghao.mychattest.controller.activity.WriteRecruitActivity;
 import com.linghao.mychattest.controller.adapter.HomeAdapter;
 import com.linghao.mychattest.controller.pager.HomeTypePager;
-import com.linghao.mychattest.model.CustomView.MytoggleButton;
 import com.linghao.mychattest.model.Model;
+import com.linghao.mychattest.utils.customview.MytoggleButton;
 import com.linghao.mychattest.model.bean.HopeInvited;
-import com.linghao.mychattest.model.bean.Recruit;
-import com.linghao.mychattest.model.dao.BmobDao;
 import com.linghao.mychattest.utils.Constant;
 import com.linghao.mychattest.controller.adapter.anotherHomeAdapter;
-import com.linghao.mychattest.utils.LogUtil;
 
 
 import java.util.ArrayList;
@@ -41,7 +39,7 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 
-import static com.xiaomi.push.service.y.s;
+import static android.R.attr.handle;
 
 /**
  * Created by linghao on 2017/7/27.
@@ -63,6 +61,7 @@ public class HomeFragment extends Fragment {
     private ArrayList<HomeTypePager> homeTypePagers;
     private TabLayout tablayout;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private ProgressBar progressBar;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Bmob.initialize(getActivity(), Constant.Bmobinit);
@@ -80,6 +79,7 @@ public class HomeFragment extends Fragment {
         mytoggleButton = (MytoggleButton) view.findViewById(R.id.mytoggleButton);
         fl_home_fragment = (FrameLayout) view.findViewById(R.id.fl_home_fragment);
         another_fragment = (FrameLayout) view.findViewById(R.id.another_fragment);
+        progressBar= (ProgressBar) view.findViewById(R.id.progress);
         mytoggleButton.setmyToggleButtonListener(new MytoggleButton.myToggleButtonListener() {
             @Override
             public void open() {
@@ -105,6 +105,8 @@ public class HomeFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         initListener();
         initData();
+
+
     }
 
     private void initListener() {
@@ -128,7 +130,16 @@ public class HomeFragment extends Fragment {
                 initData();
             }
         });
+//        fl_home_fragment.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                return false;
+//            }
+//        });
     }
+
+
+
 
     private void initData() {
         homeTypePagers=new ArrayList<>();
@@ -140,37 +151,17 @@ public class HomeFragment extends Fragment {
 
         viewPager.setAdapter(new HomeTypeAdapter());
         tablayout.setupWithViewPager(viewPager);
-//        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-//        home_recycleview.setLayoutManager(linearLayoutManager);
-//        //招募页面适配器
-//       final String type = "足球";
-//        Model.getInstance().getBmobDao().getSomeColumnfromBmob("title,content,type,groupId", new BmobDao.OnDataReceiveSuccessListener() {
-//            @Override
-//            public void onSuccess(List<Recruit> list) {
-//                LogUtil.e(list.size()+"********");
-//                List<Recruit> a=new ArrayList<>();
-//                for (int i=0;i<list.size();i++){
-//                    if(list.get(i).getType().equals(type)){
-//                        a.add(list.get(i));
-//                    }
-//                }
-//                for (int i=0;i<a.size();i++){
-//                   LogUtil.e(a.get(i).getType());
-//                }
-//                LogUtil.e(a.size()+"********");
-//                homeAdapter = new HomeAdapter(getActivity(), a);
-//                home_recycleview.setAdapter(homeAdapter);
-//
-//            }
-//
-//        });
-
-
 
 //        希望被邀请页面适配器
         HopeInvitedFromBmob();
         swipeRefreshLayout.setRefreshing(false);
+//        isfinish=true;
+//        if (isfinish=true){
+//            progressBar.setVisibility(View.GONE);
+//            isfinish=false;
+//        }
     }
+
     class HomeTypeAdapter extends PagerAdapter {
         @Override
         public CharSequence getPageTitle(int position) {
@@ -242,6 +233,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        initData();
+                initData();
+
     }
 }

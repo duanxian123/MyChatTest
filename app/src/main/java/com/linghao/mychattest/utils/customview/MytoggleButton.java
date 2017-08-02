@@ -1,4 +1,4 @@
-package com.linghao.mychattest.model.CustomView;
+package com.linghao.mychattest.utils.customview;
 
 import android.content.Context;
 import android.graphics.Bitmap;

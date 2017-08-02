@@ -2,29 +2,34 @@ package com.linghao.mychattest.controller.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.widget.RelativeLayout;
 
 import com.hyphenate.chat.EMClient;
 import com.linghao.mychattest.R;
 import com.linghao.mychattest.model.Model;
 import com.linghao.mychattest.model.bean.UserInfo;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 public class SplashActivity extends Activity {
-    Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if (isFinishing()) {
-                return;
-            } else {
-                toMainOrLogin();
-            }
-        }
-    };
+    @InjectView(R.id.splash)
+    RelativeLayout splash;
+//    Handler handler = new Handler() {
+//        @Override
+//        public void handleMessage(Message msg) {
+//            super.handleMessage(msg);
+//            if (isFinishing()) {
+//                return;
+//            } else {
+//                toMainOrLogin();
+//            }
+//        }
+//    };
 
     private void toMainOrLogin() {
         Model.getInstance().getGlobalThreadPool().execute(new Runnable() {
@@ -33,7 +38,7 @@ public class SplashActivity extends Activity {
                 if (EMClient.getInstance().isLoggedInBefore()) {
                     //获取当前登录用户的信息
                     UserInfo userInfo = Model.getInstance().getUserAccountDao().getUserInfoById(EMClient.getInstance().getCurrentUser());
-                    Log.e("查询出",userInfo.toString());
+                    Log.e("查询出", userInfo.toString());
 
                     Log.e("jinlai", "2");
                     if (userInfo == null) {
@@ -59,12 +64,37 @@ public class SplashActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        handler.sendMessageDelayed(Message.obtain(), 2000);
+        ButterKnife.inject(this);
+        setAnimation();
+//        handler.sendMessageDelayed(Message.obtain(), 2000);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        handler.removeCallbacksAndMessages(null);
+    private void setAnimation() {
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);
+        alphaAnimation.setDuration(2000);
+        alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                toMainOrLogin();
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        splash.startAnimation(alphaAnimation);
+
     }
+
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        handler.removeCallbacksAndMessages(null);
+//    }
 }
