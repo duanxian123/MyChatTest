@@ -79,7 +79,7 @@ public class HomeFragment extends Fragment {
         mytoggleButton = (MytoggleButton) view.findViewById(R.id.mytoggleButton);
         fl_home_fragment = (FrameLayout) view.findViewById(R.id.fl_home_fragment);
         another_fragment = (FrameLayout) view.findViewById(R.id.another_fragment);
-        progressBar= (ProgressBar) view.findViewById(R.id.progress);
+//        progressBar= (ProgressBar) view.findViewById(R.id.progress);
         mytoggleButton.setmyToggleButtonListener(new MytoggleButton.myToggleButtonListener() {
             @Override
             public void open() {
