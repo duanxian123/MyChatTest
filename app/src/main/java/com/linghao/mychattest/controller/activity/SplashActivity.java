@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.RelativeLayout;
@@ -68,6 +69,7 @@ public class SplashActivity extends Activity {
         setAnimation();
 //        handler.sendMessageDelayed(Message.obtain(), 2000);
     }
+
 
     private void setAnimation() {
         AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);

@@ -35,6 +35,7 @@ public class addContactActivity extends Activity {
     }
 
     private void initListener() {
+
         tvAddFind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

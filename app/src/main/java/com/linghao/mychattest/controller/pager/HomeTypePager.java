@@ -1,6 +1,8 @@
 package com.linghao.mychattest.controller.pager;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -35,6 +37,18 @@ public class HomeTypePager {
     private List<Recruit> mLists;
     public View rootView;
     private String mtype;
+    private HomeAdapter homeAdapter;
+    Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            List<Recruit> real= (List<Recruit>) msg.obj;
+                            homeAdapter = new HomeAdapter(mContext, real);
+                    recyclerView.setAdapter(homeAdapter);
+        }
+    };
+    private RecyclerView recyclerView;
+
     public HomeTypePager(Context context,String type){
         mContext=context;
 //        mLists=lists;
@@ -47,28 +61,39 @@ public class HomeTypePager {
 
     private View initView() {
         mLists=new ArrayList<>();
-        final RecyclerView recyclerView= new RecyclerView(mContext);
-
+        recyclerView = new RecyclerView(mContext);
             final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         recyclerView.setLayoutManager(linearLayoutManager);
             //招募页面适配器
             final String type = mtype;
-            Model.getInstance().getBmobDao().getSomeColumnfromBmob("title,content,type,groupId", new BmobDao.OnDataReceiveSuccessListener() {
-                @Override
-                public void onSuccess(List<Recruit> list) {
-                    LogUtil.e(list.size()+"********");
-                    List<Recruit> a=new ArrayList<>();
-                    for (int i=0;i<list.size();i++){
-                        if(list.get(i).getType().equals(type)){
-                            a.add(list.get(i));
+        Model.getInstance().getGlobalThreadPool().execute(new Runnable() {
+            @Override
+            public void run() {
+
+                Model.getInstance().getBmobDao().getSomeColumnfromBmob("title,content,type,groupId", new BmobDao.OnDataReceiveSuccessListener() {
+                    @Override
+                    public void onSuccess(List<Recruit> list) {
+                        LogUtil.e(list.size()+"********");
+                        List<Recruit> a=new ArrayList<>();
+                        for (int i=0;i<list.size();i++){
+                            if(list.get(i).getType().equals(type)){
+                                a.add(list.get(i));
+                            }
+                            Message msg=new Message();
+                          msg.obj=a;
+                            handler.sendMessage(msg);
                         }
-                    }
-                    for (int i=0;i<a.size();i++){
-                        LogUtil.e(a.get(i).getType());
-                    }
-                    LogUtil.e(a.size()+"********");
-                    HomeAdapter homeAdapter = new HomeAdapter(mContext, a);
-                    recyclerView.setAdapter(homeAdapter);
+
+            }
+        });
+
+//                    for (int i=0;i<a.size();i++){
+//                        LogUtil.e(a.get(i).getType());
+//                    }
+//                    LogUtil.e(a.size()+"********");
+
+//                homeAdapter = new HomeAdapter(mContext, a);
+//                    recyclerView.setAdapter(homeAdapter);
 
                 }
 

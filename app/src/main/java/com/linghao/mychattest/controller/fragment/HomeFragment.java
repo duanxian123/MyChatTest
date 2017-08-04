@@ -25,6 +25,7 @@ import com.linghao.mychattest.controller.activity.WriteRecruitActivity;
 import com.linghao.mychattest.controller.adapter.HomeAdapter;
 import com.linghao.mychattest.controller.pager.HomeTypePager;
 import com.linghao.mychattest.model.Model;
+import com.linghao.mychattest.utils.customview.MyToggle;
 import com.linghao.mychattest.utils.customview.MytoggleButton;
 import com.linghao.mychattest.model.bean.HopeInvited;
 import com.linghao.mychattest.utils.Constant;
@@ -61,7 +62,7 @@ public class HomeFragment extends Fragment {
     private ArrayList<HomeTypePager> homeTypePagers;
     private TabLayout tablayout;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private ProgressBar progressBar;
+//    private ProgressBar progressBar;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Bmob.initialize(getActivity(), Constant.Bmobinit);
@@ -230,10 +231,10 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-                initData();
-
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//                initData();
+//
+//    }
 }

@@ -24,6 +24,12 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true" />
+       <!--<com.linghao.mychattest.utils.customview.MyToggle>-->
+        <!--android:id="@+id/mytoggleButton"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_centerVertical="true" />-->
     </RelativeLayout>
     <!--<ProgressBar-->
         <!--android:layout_width="100dp"-->
