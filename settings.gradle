@@ -1,1 +1,2 @@
-include ':app', ':easeui'
+include ':easeui', ':alipay_demo'
+include ':app'

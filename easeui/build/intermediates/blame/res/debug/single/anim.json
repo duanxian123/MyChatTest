@@ -12,10 +12,6 @@
         "source": "C:\\android stdio\\MyChatTest\\easeui\\src\\main\\res\\anim\\push_top_in.xml"
     },
     {
-        "merged": "C:\\android stdio\\MyChatTest\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\design_bottom_sheet_slide_in.xml",
-        "source": "C:\\Users\\linghao\\.android\\build-cache\\8f50efbc4e5f72d1417cd99f825f2472275796c9\\output\\res\\anim\\design_bottom_sheet_slide_in.xml"
-    },
-    {
         "merged": "C:\\android stdio\\MyChatTest\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\head_in.xml",
         "source": "C:\\android stdio\\MyChatTest\\easeui\\src\\main\\res\\anim\\head_in.xml"
     },
@@ -92,16 +88,8 @@
         "source": "C:\\android stdio\\MyChatTest\\easeui\\src\\main\\res\\anim\\slide_out_to_right.xml"
     },
     {
-        "merged": "C:\\android stdio\\MyChatTest\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\design_snackbar_in.xml",
-        "source": "C:\\Users\\linghao\\.android\\build-cache\\8f50efbc4e5f72d1417cd99f825f2472275796c9\\output\\res\\anim\\design_snackbar_in.xml"
-    },
-    {
         "merged": "C:\\android stdio\\MyChatTest\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_bottom.xml",
         "source": "C:\\Users\\linghao\\.android\\build-cache\\60f3551df505a2f6a8a440fbeb53261e5f5a5217\\output\\res\\anim\\abc_slide_in_bottom.xml"
-    },
-    {
-        "merged": "C:\\android stdio\\MyChatTest\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\design_bottom_sheet_slide_out.xml",
-        "source": "C:\\Users\\linghao\\.android\\build-cache\\8f50efbc4e5f72d1417cd99f825f2472275796c9\\output\\res\\anim\\design_bottom_sheet_slide_out.xml"
     },
     {
         "merged": "C:\\android stdio\\MyChatTest\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_top.xml",
@@ -118,9 +106,5 @@
     {
         "merged": "C:\\android stdio\\MyChatTest\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_in.xml",
         "source": "C:\\Users\\linghao\\.android\\build-cache\\60f3551df505a2f6a8a440fbeb53261e5f5a5217\\output\\res\\anim\\abc_fade_in.xml"
-    },
-    {
-        "merged": "C:\\android stdio\\MyChatTest\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\design_snackbar_out.xml",
-        "source": "C:\\Users\\linghao\\.android\\build-cache\\8f50efbc4e5f72d1417cd99f825f2472275796c9\\output\\res\\anim\\design_snackbar_out.xml"
     }
 ]

@@ -51,4 +51,7 @@ dependencies {
     compile 'com.android.support:support-v4:25.3.1'
     compile 'com.jakewharton:butterknife:5.1.1'
     testCompile 'junit:junit:4.12'
+    compile files('libs/alipaysdk.jar')
+    compile files('libs/alipaysecsdk.jar')
+    compile files('libs/alipayutdid.jar')
 }

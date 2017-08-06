@@ -9,11 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.linghao.mychattest.R;
+import com.linghao.mychattest.controller.activity.ChongzhiActivity;
 import com.linghao.mychattest.controller.activity.LoginActivity;
 import com.linghao.mychattest.model.Model;
 
@@ -25,6 +27,7 @@ import com.linghao.mychattest.model.Model;
 
 public class SettingFragment extends Fragment {
     private Button bt_setting_out;
+    private TextView tv_chongzhi;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,8 +44,17 @@ public class SettingFragment extends Fragment {
     }
     private void iniView(View view) {
         bt_setting_out = (Button) view.findViewById(R.id.bt_setting_out);
+        tv_chongzhi= (TextView) view.findViewById(R.id.chongzhi);
+
     }
     private void initData() {
+        tv_chongzhi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ChongzhiActivity.class);
+                startActivity(intent);
+            }
+        });
         bt_setting_out.setText("退出登录（"+ EMClient.getInstance().getCurrentUser()+")");
         bt_setting_out.setOnClickListener(new View.OnClickListener() {
             @Override

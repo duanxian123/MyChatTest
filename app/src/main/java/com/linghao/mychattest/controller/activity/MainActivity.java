@@ -1,15 +1,19 @@
 package com.linghao.mychattest.controller.activity;
 
 import android.app.Activity;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.linghao.mychattest.R;
 import com.linghao.mychattest.controller.fragment.ChatFragment;
@@ -31,6 +35,17 @@ public class MainActivity extends FragmentActivity {
     private ContactFragment contactFragment;
     private SettingFragment settingFragment;
     private HomeFragment homeFragment;
+    private boolean isFlag = true;
+    private static final int MESSAGE_BACK = 1;
+    private Handler handler = new Handler(){
+        public void handleMessage(Message msg){
+            switch (msg.what) {
+                case MESSAGE_BACK :
+                    isFlag = true;//在2时，恢复isFlag的变量值
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +54,7 @@ public class MainActivity extends FragmentActivity {
         initView();
         initData();
         initListener();
+
     }
 
     private void initListener() {
@@ -90,6 +106,21 @@ public class MainActivity extends FragmentActivity {
         rbContact = (RadioButton) findViewById(R.id.rb_contact);
         rbSetting = (RadioButton) findViewById(R.id.rb_setting);
 
+    }
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+
+
+        if(keyCode == KeyEvent.KEYCODE_BACK && isFlag){//如果操作的是“返回键”
+            isFlag = false;
+            Toast.makeText(MainActivity.this, "再点击一次退出应用", Toast.LENGTH_SHORT).show();
+            //发送延迟消息
+            handler.sendEmptyMessageDelayed(MESSAGE_BACK,2000);
+            return true;
+
+        }
+
+        return super.onKeyUp(keyCode, event);
     }
 
 }
