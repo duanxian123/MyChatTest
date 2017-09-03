@@ -1,2 +1,2 @@
-include ':easeui', ':alipay_demo'
+include ':easeui', ':alipay_demo', ':GestureLock', ':MygestureLock'
 include ':app'

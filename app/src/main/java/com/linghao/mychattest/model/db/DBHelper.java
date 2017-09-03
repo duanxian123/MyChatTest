@@ -23,11 +23,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        Log.e("创建","4");
         db.execSQL(ContactTable.CREATE_TAB);
-        Log.e("创建","2");
         db.execSQL(InviteTable.CREATE_TAB);
-        Log.e("创建","3");
     }
 
     @Override

@@ -1,6 +1,8 @@
 package com.linghao.mychattest.controller.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -10,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +21,8 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hyphenate.chat.adapter.EMACallSession;
 import com.linghao.mychattest.R;
 import com.linghao.mychattest.controller.activity.WriteInvitedActivity;
@@ -25,6 +30,7 @@ import com.linghao.mychattest.controller.activity.WriteRecruitActivity;
 import com.linghao.mychattest.controller.adapter.HomeAdapter;
 import com.linghao.mychattest.controller.pager.HomeTypePager;
 import com.linghao.mychattest.model.Model;
+import com.linghao.mychattest.model.bean.Recruit;
 import com.linghao.mychattest.utils.customview.MyToggle;
 import com.linghao.mychattest.utils.customview.MytoggleButton;
 import com.linghao.mychattest.model.bean.HopeInvited;
@@ -62,7 +68,8 @@ public class HomeFragment extends Fragment {
     private ArrayList<HomeTypePager> homeTypePagers;
     private TabLayout tablayout;
     private SwipeRefreshLayout swipeRefreshLayout;
-//    private ProgressBar progressBar;
+    private SharedPreferences sharedPreferences;
+    //    private ProgressBar progressBar;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Bmob.initialize(getActivity(), Constant.Bmobinit);
@@ -128,7 +135,10 @@ public class HomeFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                initData();
+                initZhaomu();
+                HopeInvitedFromBmob();
+                swipeRefreshLayout.setRefreshing(false);
+
             }
         });
 //        fl_home_fragment.setOnTouchListener(new View.OnTouchListener() {
@@ -143,6 +153,27 @@ public class HomeFragment extends Fragment {
 
 
     private void initData() {
+        sharedPreferences = getActivity().getSharedPreferences("homeFragment", Context.MODE_PRIVATE);
+        initZhaomu();
+        initInvited();
+    }
+
+    private void initInvited() {
+        String shequ = sharedPreferences.getString("shequ", "");
+        List<HopeInvited> listfromLocal=new ArrayList<>();
+        if(!TextUtils.isEmpty(shequ)){
+            //把数据转换成列表
+            listfromLocal = new Gson().fromJson(shequ, new TypeToken<List<HopeInvited>>() {
+            }.getType());
+            setAdapter(listfromLocal);
+        }
+        else{
+            //        从bmob获取数据
+            HopeInvitedFromBmob();
+        }
+    }
+
+    private void initZhaomu() {
         homeTypePagers=new ArrayList<>();
         homeTypePagers.add(new HomeTypePager(getActivity(),"篮球"));
         homeTypePagers.add(new HomeTypePager(getActivity(),"足球"));
@@ -152,15 +183,6 @@ public class HomeFragment extends Fragment {
 
         viewPager.setAdapter(new HomeTypeAdapter());
         tablayout.setupWithViewPager(viewPager);
-
-//        希望被邀请页面适配器
-        HopeInvitedFromBmob();
-        swipeRefreshLayout.setRefreshing(false);
-//        isfinish=true;
-//        if (isfinish=true){
-//            progressBar.setVisibility(View.GONE);
-//            isfinish=false;
-//        }
     }
 
     class HomeTypeAdapter extends PagerAdapter {
@@ -220,15 +242,21 @@ public class HomeFragment extends Fragment {
             public void done(List<HopeInvited> list, BmobException e) {
                 if (e == null) {
                     Log.e("bmob", "成功");
-                    LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getActivity());
-                    another_home_recycleview.setLayoutManager(linearLayoutManager1);
-                    anotherHomeAdapter anotherHomeAdapter = new anotherHomeAdapter(getActivity(), list);
-                    another_home_recycleview.setAdapter(anotherHomeAdapter);
+                    String json = new Gson().toJson(list);
+                    sharedPreferences.edit().putString("shequ",json).commit();
+                    setAdapter(list);
                 } else {
                     Log.e("bmob", "失败：" + e.getMessage() + "," + e.getErrorCode());
                 }
             }
         });
+    }
+
+    private void setAdapter(List<HopeInvited> list) {
+        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getActivity());
+        another_home_recycleview.setLayoutManager(linearLayoutManager1);
+        anotherHomeAdapter anotherHomeAdapter = new anotherHomeAdapter(getActivity(), list);
+        another_home_recycleview.setAdapter(anotherHomeAdapter);
     }
 
 //    @Override

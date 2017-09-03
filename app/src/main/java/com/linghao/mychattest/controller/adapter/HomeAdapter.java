@@ -89,37 +89,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
                     }
                 });
                 Toast.makeText(mContext, "申请中", Toast.LENGTH_SHORT).show();
-//                BmobQuery<Recruit> query = new BmobQuery<Recruit>();
-//                LogUtil.e("1-----------");
-//                query.addQueryKeys("groupId");
-//                LogUtil.e("2------------");
-//                final String[] mGroupId = new String[1];
-//                query.findObjects(new FindListener<Recruit>() {
-//                    @Override
-//                    public void done(List<Recruit> list, BmobException e) {
-//                        if (e == null) {
-//                            for (int i = 0; i < list.size(); i++) {
-//                                LogUtil.e(list.get(i).toString());
-//                            }
-//                            mGroupId[0] =list.get(position).getGroupId();
-//                            LogUtil.e(mGroupId[0]);
-//                            Model.getInstance().getGlobalThreadPool().execute(new Runnable() {
-//                                @Override
-//                                public void run() {
-//                                    try {
-//                                        LogUtil.e(mGroupId[0]+"22222222222222222");
-//                                        EMClient.getInstance().groupManager().applyJoinToGroup(mGroupId[0], "求加入");
-//                                        Log.e("---------------*******","success");
-//                                    } catch (HyphenateException e) {
-//                                        e.printStackTrace();
-//                                    }
-//                                }
-//                            });
-//                        } else {
-//                            Log.e("bmob", "失败：" + e.getMessage() + "," + e.getErrorCode());
-//                        }
-//                    }
-//                });
 
 
             }

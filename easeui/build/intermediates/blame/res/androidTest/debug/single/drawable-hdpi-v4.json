@@ -92,12 +92,12 @@
         "source": "C:\\android stdio\\MyChatTest\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ease_record_animate_12.png"
     },
     {
-        "merged": "C:\\android stdio\\MyChatTest\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\ee_29.png",
-        "source": "C:\\android stdio\\MyChatTest\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ee_29.png"
-    },
-    {
         "merged": "C:\\android stdio\\MyChatTest\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\ee_15.png",
         "source": "C:\\android stdio\\MyChatTest\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ee_15.png"
+    },
+    {
+        "merged": "C:\\android stdio\\MyChatTest\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\ee_29.png",
+        "source": "C:\\android stdio\\MyChatTest\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ee_29.png"
     },
     {
         "merged": "C:\\android stdio\\MyChatTest\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\ease_type_select_btn_nor.png",

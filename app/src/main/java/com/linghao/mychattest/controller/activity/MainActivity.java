@@ -1,6 +1,9 @@
 package com.linghao.mychattest.controller.activity;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.IdRes;
@@ -21,6 +24,7 @@ import com.linghao.mychattest.controller.fragment.ContactFragment;
 import com.linghao.mychattest.controller.fragment.HomeFragment;
 import com.linghao.mychattest.controller.fragment.SettingFragment;
 import com.linghao.mychattest.utils.Constant;
+import com.linghao.mychattest.utils.LogUtil;
 
 import cn.bmob.v3.Bmob;
 
@@ -54,7 +58,15 @@ public class MainActivity extends FragmentActivity {
         initView();
         initData();
         initListener();
-
+        SharedPreferences sp = getSharedPreferences("secret_protect", Context.MODE_PRIVATE);
+        boolean isOpen = sp.getBoolean("isOpen", false);
+        LogUtil.e("*****"+isOpen);
+        if (isOpen){
+            LogUtil.e("*****"+1111);
+            Intent intent1=new Intent(MainActivity.this,GestureVerifyActivity.class);
+            startActivity(intent1);
+            LogUtil.e("*****"+2222);
+        }
     }
 
     private void initListener() {

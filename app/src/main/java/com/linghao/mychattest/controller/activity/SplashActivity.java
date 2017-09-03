@@ -1,7 +1,9 @@
 package com.linghao.mychattest.controller.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -13,6 +15,7 @@ import com.hyphenate.chat.EMClient;
 import com.linghao.mychattest.R;
 import com.linghao.mychattest.model.Model;
 import com.linghao.mychattest.model.bean.UserInfo;
+import com.linghao.mychattest.utils.LogUtil;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;

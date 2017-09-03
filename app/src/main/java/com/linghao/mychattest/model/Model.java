@@ -36,10 +36,10 @@ public class Model {
     private ContactTableDao contactTableDao;
     private BmobDao bmobDao =new BmobDao();;
 
-    //    // 私有化构造
-//    private Model() {
-//
-//    }
+        // 私有化构造
+    private Model() {
+
+    }
     //获取单例对象
     public static Model getInstance() {
         return model;
