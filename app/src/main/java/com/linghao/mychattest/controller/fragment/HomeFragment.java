@@ -65,7 +65,7 @@ public class HomeFragment extends Fragment {
     private FrameLayout fl_home_fragment;
     private FrameLayout another_fragment;
     private ViewPager viewPager;
-    private ArrayList<HomeTypePager> homeTypePagers;
+    private List<HomeTypePager> homeTypePagers;
     private TabLayout tablayout;
     private SwipeRefreshLayout swipeRefreshLayout;
     private SharedPreferences sharedPreferences;
@@ -180,7 +180,6 @@ public class HomeFragment extends Fragment {
         homeTypePagers.add(new HomeTypePager(getActivity(),"跑步"));
         homeTypePagers.add(new HomeTypePager(getActivity(),"游泳"));
         homeTypePagers.add(new HomeTypePager(getActivity(),"旅游"));
-
         viewPager.setAdapter(new HomeTypeAdapter());
         tablayout.setupWithViewPager(viewPager);
     }
