@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "C:\\android stdio\\MyChatTest\\alipay_demo\\build\\intermediates\\res\\merged\\debug\\layout\\pay_main.xml",
+        "source": "C:\\android stdio\\MyChatTest\\alipay_demo\\src\\main\\res\\layout\\pay_main.xml"
+    },
+    {
+        "merged": "C:\\android stdio\\MyChatTest\\alipay_demo\\build\\intermediates\\res\\merged\\debug\\layout\\pay_external.xml",
+        "source": "C:\\android stdio\\MyChatTest\\alipay_demo\\src\\main\\res\\layout\\pay_external.xml"
+    }
+]
